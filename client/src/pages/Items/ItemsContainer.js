@@ -4,16 +4,20 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import MenuBar from '../../components/MenuBar';
 // import FullScreenLoader from '../../components/FullScreenLoader';
-// import { Query } from 'react-apollo';
-// import { } from '../../apollo/queries';
+import { Query } from 'react-apollo';
+import { ALL_ITEMS_QUERY } from '../../apollo/queries';
 
 class ItemsContainer extends Component {
   render() {
     return (
-      <>
-        <MenuBar />
-        <Items />
-      </>
+      <Query query={ALL_ITEMS_QUERY}>
+        {({ loading, error, data }) => {
+          if (loading) return 'Loading...';
+          if (error) return `Error! ${error.message}`;
+
+          return <Items items={data.items} />;
+        }}
+      </Query>
     );
   }
 }

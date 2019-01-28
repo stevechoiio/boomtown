@@ -7,104 +7,82 @@ import TextField from '@material-ui/core/TextField';
 import { Form, Field } from 'react-final-form';
 import TagList from '../TagList';
 import Button from '@material-ui/core/Button';
+import styles from './styles';
 
-const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200
-  },
-  dense: {
-    marginTop: 19
-  },
-  menu: {
-    width: 200
-  }
-});
-
-const onSubmit = async values => {
-  window.alert(values);
+const onSubmit = values => {
+  console.log(values);
 };
+
+const formValidation = values => {
+  const errors = {};
+  if (!values.title) {
+    errors.itemTitle = 'Required';
+  }
+  if (!values.description) {
+    errors.description = 'Required';
+
+    return errors;
+  }
+};
+
 class ShareItemForm extends React.Component {
-  state = {
-    name: 'Cat in the Hat',
-    age: '',
-    multiline: 'Controlled',
-    currency: 'EUR'
-  };
-
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    });
-  };
-
   render() {
-    const { classes } = this.props;
-
     return (
       <Form
         onSubmit={onSubmit}
-        validate={() => {}}
-        render={({ handleSubmit, pristine, invalid }) => (
-          <form className={classes.container} noValidate autoComplete="off">
-            <TextField
-              id="standard-name"
-              label="Name"
-              className={classes.textField}
-              value={this.state.name}
-              onChange={this.handleChange('name')}
-              margin="normal"
-            />
-
-            <TextField
-              id="standard-full-width"
-              label="Label"
-              style={{ margin: 8 }}
-              placeholder="Describe your item"
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true
-              }}
-            />
-            <TextField
-              id="tag"
-              select
-              label="Tags"
-              className={classes.textField}
-              onChange={this.handleChange('currency')}
-              SelectProps={{
-                MenuProps: {
-                  className: classes.menu
-                }
-              }}
-              helperText="tags"
-              margin="normal"
-              variant="outlined"
-            >
-              <TagList />
-            </TextField>
-
-            <Button
-              variant="contained" 
-              href="#contained-buttons"
-              className={classes.button}
-            >
+        validate={formValidation}
+        render={({ handleSubmit, form, submitting, pristine, values }) => (
+          <form onSubmit={handleSubmit}>
+            <Button variant="contained" href="#contained-buttons">
               Select an Image
             </Button>
-            <Button
-              type="submit"
-              variant="contained"
-              href="#contained-buttons"
-              className={classes.button}
+            <Field
+              name="title"
+              component="input"
+              type="text"
+              placeholder="Name your Item"
             >
-              Submit
+              {({ input, meta }) => (
+                <div>
+                  <TextField {...input} />
+                  {console.log('meta is', meta)}
+                  {meta.error && meta.touched && <span>{meta.itemTitle}</span>}
+                </div>
+              )}
+            </Field>
+            <Field
+              name="description"
+              component="input"
+              type="text"
+              placeholder="Name your Item"
+            >
+              {({ input, meta }) => (
+                <div>
+                  <TextField {...input} />
+                  {console.log('meta is', meta)}
+                  {meta.error && meta.touched && <span>{meta.itemTitle}</span>}
+                </div>
+              )}
+            </Field>
+            <Field name="tags" component="input" type="text">
+              {({ input, meta }) => (
+                <div>
+                  <TextField select>
+                    <TagList />
+
+                    {console.log('meta is', meta)}
+                    {meta.error &&
+                      meta.touched && <span>{meta.itemTitle}</span>}
+                  </TextField>
+                </div>
+              )}
+            </Field>
+
+            <Button variant="contained" href="#contained-buttons">
+              Select an Image
             </Button>
+            <Button type="submit">Submit</Button>
+            <pre>{JSON.stringify(values, 0, 2)}</pre>
           </form>
         )}
       />

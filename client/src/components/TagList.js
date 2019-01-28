@@ -4,6 +4,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { Query } from 'react-apollo';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 const TagList = () => {
   return (
     <div>
@@ -16,12 +19,10 @@ const TagList = () => {
           return (
             <>
               {data.tags.map(tag => (
-                <MenuItem key={tag.id} value={tag.title}>
-                  <FormControlLabel
-                    control={<Checkbox value="checkedB" color="primary" />}
-                    label={tag.title}
-                  />
-                </MenuItem>
+                <FormControlLabel
+                  control={<Checkbox key={tag.id} value={tag.title} />}
+                  label={tag.title}
+                />
               ))}
             </>
           );

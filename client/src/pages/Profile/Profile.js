@@ -6,81 +6,45 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { ALL_USER_ITEMS_QUERY } from '../../apollo/queries';
+import { ALL_user_ITEMS_QUERY } from '../../apollo/queries';
 import { withStyles } from '@material-ui/core/styles';
-
+import ItemsGrid from '../../components/ItemsGrid/ItemsGrid';
 import MenuBar from '../../components/MenuBar';
-
-const styles = {
-  card: {
-    maxWidth: 345
-  },
-  media: {
-    height: 140
-  }
-};
-const Profile = ({ classes, id }) => {
+import styles from './styles';
+import { withRouter } from 'react-router-dom';
+const Profile = ({ classes, id, user, history, styles }) => {
   return (
     <div>
       <MenuBar />
 
-      <Query variables={{ id: id }} query={ALL_USER_ITEMS_QUERY}>
-        {({ loading, error, data }) => {
-          if (loading) return 'Loading...';
-          if (error) return `Error! ${error.message}`;
-          const USER = data.user;
-          return (
-            <>
-              <Card className={classes.styles}>
-                <CardContent>
-                  <Typography component="h2" variant="display4" gutterBottom>
-                    {USER.name}
-                  </Typography>
-                  <Typography>
-                    Bio:{USER.bio != 'null' ? USER.bio : 'no bio shared'}
-                  </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
-                    {' '}
-                    <span style={{ color: 'Red' }}>
-                      {USER.items.length}
-                    </span>{' '}
-                    owned,{' '}
-                    <span style={{ color: 'Red' }}>
-                      {USER.items.borrowed ? USER.items.borrowed.length : 0}
-                    </span>{' '}
-                    borrowed
-                  </Typography>
+      <Card className={styles}>
+        <CardContent>
+          <Typography component="h2" variant="display4" gutterBottom>
+            {user.name}
+          </Typography>
+          <Typography>
+            Bio:{user.bio != 'null' ? user.bio : 'no bio shared'}
+          </Typography>
+          <Typography variant="subtitle1" gutterBottom>
+            {' '}
+            <span style={{ color: 'Red' }}>
+              {user.items.length}
+            </span> owned,{' '}
+            <span style={{ color: 'Red' }}>
+              {user.items.borrowed ? user.items.borrowed.length : 0}
+            </span>{' '}
+            borrowed
+          </Typography>
 
-                  <Typography component="h2" variant="h1" gutterBottom>
-                    Shared items:
-                  </Typography>
+          <Typography component="h2" variant="h1" gutterBottom>
+            Shared items:
+          </Typography>
 
-                  {USER.items.map(item => {
-                    return (
-                      <>
-                        <Typography variant="h2" gutterBottom>
-                          {item.title}
-                        </Typography>
-
-                        <li>{item.description}</li>
-                      </>
-                    );
-                  })}
-
-                  <Typography
-                    color="textSecondary"
-                    variant="h5"
-                    component="h2"
-                    gutterBottom
-                  />
-                </CardContent>
-              </Card>
-            </>
-          );
-        }}
-      </Query>
+          <ItemsGrid items={user.items} history={history} />
+        </CardContent>
+      </Card>
     </div>
   );
 };
 
-export default withStyles(styles)(Profile);
+export default withRouter(withStyles(styles)(Profile));
