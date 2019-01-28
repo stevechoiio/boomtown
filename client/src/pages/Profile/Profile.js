@@ -9,40 +9,15 @@ import Typography from '@material-ui/core/Typography';
 import { ALL_user_ITEMS_QUERY } from '../../apollo/queries';
 import { withStyles } from '@material-ui/core/styles';
 import ItemsGrid from '../../components/ItemsGrid/ItemsGrid';
-import MenuBar from '../../components/MenuBar';
+import MenuBar from '../../components/MenuBar/MenuBar';
 import styles from './styles';
 import { withRouter } from 'react-router-dom';
+import ProfileCard from '../../components/ProfileCard/ProfileCard';
 const Profile = ({ classes, id, user, history, styles }) => {
   return (
     <div>
       <MenuBar />
-
-      <Card className={styles}>
-        <CardContent>
-          <Typography component="h2" variant="display4" gutterBottom>
-            {user.name}
-          </Typography>
-          <Typography>
-            Bio:{user.bio != 'null' ? user.bio : 'no bio shared'}
-          </Typography>
-          <Typography variant="subtitle1" gutterBottom>
-            {' '}
-            <span style={{ color: 'Red' }}>
-              {user.items.length}
-            </span> owned,{' '}
-            <span style={{ color: 'Red' }}>
-              {user.items.borrowed ? user.items.borrowed.length : 0}
-            </span>{' '}
-            borrowed
-          </Typography>
-
-          <Typography component="h2" variant="h1" gutterBottom>
-            Shared items:
-          </Typography>
-
-          <ItemsGrid items={user.items} history={history} />
-        </CardContent>
-      </Card>
+      <ProfileCard user={user} history={history} id={id} />
     </div>
   );
 };
