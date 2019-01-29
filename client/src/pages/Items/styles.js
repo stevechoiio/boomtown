@@ -1,14 +1,25 @@
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    height: '100%',
+    background: theme.palette.primary.main,
+    padding: theme.spacing.unit * 5,
+    [theme.breakpoints.up('md')]: {
+      padding: theme.spacing.unit * 20
+    }
   },
-  paper: {
-    height: 300,
-    width: 400,
-    margin: 20
+  headline: {
+    fontWeight: 700,
+    color: theme.palette.text.primary,
+    fontSize: theme.typography.display3.fontSize,
+    [theme.breakpoints.up('md')]: {
+      fontSize: theme.typography.display4.fontSize
+    }
   },
-  control: {
-    padding: theme.spacing.unit * 2
+  subheading: {
+    fontWeight: 400,
+    color: 'white'
   }
 });
+
 export default styles;

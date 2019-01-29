@@ -9,6 +9,7 @@ import TagList from '../TagList/TagList';
 import Button from '@material-ui/core/Button';
 import styles from './styles';
 import Grid from '@material-ui/core/Grid';
+import { Typography } from '@material-ui/core';
 
 const onSubmit = values => {
   console.log(values);
@@ -28,41 +29,52 @@ const formValidation = values => {
 
 class ShareItemForm extends React.Component {
   render() {
+    const { classes } = this.props;
     return (
-      <Grid>
-        <h1>Share, Borrow, Prosper.</h1>
+      <Grid
+        container
+        className={classes.root}
+        direction="row"
+        alignItems="center"
+        justify="center"
+      >
+        <Typography variant="display4" className={classes.headline}>
+          Share. Borrow. Prosper.
+        </Typography>
         <Form
           onSubmit={onSubmit}
           validate={formValidation}
           render={({ handleSubmit, form, submitting, pristine, values }) => (
             <form onSubmit={handleSubmit}>
-              <Button variant="contained" href="#contained-buttons">
+              <Button
+                className={classes.button}
+                variant="contained"
+                href="#contained-buttons"
+              >
                 Select an Image
               </Button>
-              <Field
-                name="title"
-                component="input"
-                type="text"
-                placeholder="Name your Item"
-              >
+              <Field name="title" component="input" type="text">
                 {({ input, meta }) => (
                   <div>
-                    <TextField {...input} />
+                    <TextField
+                      className={classes.formField}
+                      {...input}
+                      placeholder="Name your Item"
+                    />
                     {console.log('meta is', meta)}
                     {meta.error &&
                       meta.touched && <span>{meta.itemTitle}</span>}
                   </div>
                 )}
               </Field>
-              <Field
-                name="description"
-                component="input"
-                type="text"
-                placeholder="Name your Item"
-              >
+              <Field name="description" component="input" type="text">
                 {({ input, meta }) => (
                   <div>
-                    <TextField {...input} />
+                    <TextField
+                      className={classes.formField}
+                      {...input}
+                      placeholder="Describe your Item"
+                    />
                     {console.log('meta is', meta)}
                     {meta.error &&
                       meta.touched && <span>{meta.itemTitle}</span>}
@@ -72,7 +84,7 @@ class ShareItemForm extends React.Component {
               <Field name="tags" component="input" type="text">
                 {({ input, meta }) => (
                   <div>
-                    <TextField select>
+                    <TextField select className={classes.formField}>
                       <TagList />
 
                       {console.log('meta is', meta)}
@@ -83,11 +95,7 @@ class ShareItemForm extends React.Component {
                 )}
               </Field>
 
-              <Button variant="contained" href="#contained-buttons">
-                Select an Image
-              </Button>
               <Button type="submit">Submit</Button>
-              <pre>{JSON.stringify(values, 0, 2)}</pre>
             </form>
           )}
         />

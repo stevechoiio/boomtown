@@ -12,7 +12,7 @@ class ShareContainer extends Component {
     return (
       <>
         <MenuBar />
-        <Share />
+        <Share classes={this.props.classes} />
       </>
     );
   }

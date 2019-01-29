@@ -22,4 +22,4 @@ const Profile = ({ classes, id, user, history, styles }) => {
   );
 };
 
-export default withRouter(withStyles(styles)(Profile));
+export default withRouter(Profile);

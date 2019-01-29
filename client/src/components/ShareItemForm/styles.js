@@ -1,18 +1,16 @@
 const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap'
+  button: {
+    width: 400
   },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200
+  headline: {
+    fontWeight: 700,
+    color: theme.palette.text.primary,
+    fontSize: theme.typography.display3.fontSize,
+    marginBottom: 100
   },
-  dense: {
-    marginTop: 19
-  },
-  menu: {
-    width: 200
+  formField: {
+    marginTop: 50,
+    width: 400
   }
 });
 

@@ -18,7 +18,13 @@ import { ADD_ITEM_MUTATION } from '../../apollo/queries';
 const Share = ({ classes }) => {
   return (
     <div>
-      <Grid container spacing={12}>
+      <Grid
+        container
+        className={classes.root}
+        direction="row"
+        alignItems="center"
+        justify="center"
+      >
         <Grid item xs={6}>
           <ShareItemPreview />
         </Grid>
@@ -29,7 +35,7 @@ const Share = ({ classes }) => {
             children as a render function <<< */}
           {/* {(addItem, { loading, error }) => ( */}
           <ShareItemForm />
-          )}
+
           {/* </Mutation> */}
         </Grid>
       </Grid>
