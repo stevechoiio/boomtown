@@ -15,7 +15,7 @@ import ShareItemForm from '../../components/ShareItemForm/ShareItemForm';
 import ShareItemPreview from '../../components/ShareItemPreview/ShareItemPreview';
 import { Mutation } from 'react-apollo';
 import { ADD_ITEM_MUTATION } from '../../apollo/queries';
-const Share = ({ classes }) => {
+const Share = ({ classes, tags }) => {
   return (
     <div>
       <Grid
@@ -34,7 +34,7 @@ const Share = ({ classes }) => {
             {/*
             children as a render function <<< */}
           {/* {(addItem, { loading, error }) => ( */}
-          <ShareItemForm />
+          <ShareItemForm tags={tags} />
 
           {/* </Mutation> */}
         </Grid>

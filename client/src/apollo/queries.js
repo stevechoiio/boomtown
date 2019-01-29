@@ -58,6 +58,7 @@ export const ALL_USER_ITEMS_QUERY = gql`
 export const ALL_TAGS_QUERY = gql`
   query {
     tags {
+      id
       title
     }
   }

@@ -22,14 +22,11 @@ const ItemCard = ({ item, history, classes }) => {
   return (
     <Card
       onClick={() => {
-        history.push(`/profile/${item.itemowner.id}`);
+        history && history.push(`/profile/${item.itemowner.id}`);
       }}
       className={classes.card}
     >
-      <CardMedia
-        className={classes.media}
-        image="https://www.gstatic.com/webp/gallery/1.jpg"
-      />
+      <CardMedia className={classes.media} image={item.imageurl} />
       <CardContent>
         <Gravatar
           style={{ borderRadius: '30px' }}

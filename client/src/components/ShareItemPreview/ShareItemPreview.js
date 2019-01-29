@@ -1,13 +1,12 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-
-import CardContent from '@material-ui/core/CardContent';
-import Gravatar from 'react-gravatar';
-import { withStyles } from '@material-ui/core';
 import ItemCard from '../ItemCard/ItemCard';
+import { connect } from 'react-redux';
 
-const ShareItemPreview = () => {
-  return <ItemCard />;
+const ShareItemPreview = ({ shareItemPreview }) => {
+  return <ItemCard item={shareItemPreview} />;
 };
 
-export default ShareItemPreview;
+const mapStateToProps = state => ({
+  shareItemPreview: state.shareItemPreview
+});
+export default connect(mapStateToProps)(ShareItemPreview);

@@ -1,15 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { withStyles } from '@material-ui/core/styles';
-
+import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
-import { Form, Field } from 'react-final-form';
-import TagList from '../TagList/TagList';
+import { Form, Field, FormSpy } from 'react-final-form';
 import Button from '@material-ui/core/Button';
 import styles from './styles';
 import Grid from '@material-ui/core/Grid';
-import { Typography } from '@material-ui/core';
+import Checkbox from '@material-ui/core/Checkbox';
+import MenuItem from '@material-ui/core/MenuItem';
+import { Typography, FormControl, InputLabel } from '@material-ui/core';
+import Select from '@material-ui/core/Select';
+import ListItemText from '@material-ui/core/ListItemText';
+import {
+  updateItem,
+  resetItem,
+  resetImage
+} from '../../redux/modules/ShareItem';
 
 const onSubmit = values => {
   console.log(values);
@@ -28,8 +35,70 @@ const formValidation = values => {
 };
 
 class ShareItemForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.fileInput = React.createRef();
+    this.state = {
+      fileSelected: false,
+      done: false,
+      selectedTags: []
+    };
+  }
+  generateTagsText(tags, selected) {
+    return tags
+      .map(t => (selected.indexOf(t.id) > -1 ? t.title : false))
+      .filter(e => e)
+      .join(', ');
+  }
+
+  dispatchUpdate(values, tags, updateItem) {
+    if (!values.imageurl && this.state.fileSelected) {
+      this.getBase64Url().then(imageurl => {
+        updateItem({
+          imageurl
+        });
+      });
+    }
+    updateItem({
+      ...values,
+      tags: this.applyTags(tags)
+    });
+  }
+
+  handleSelectTags = event => {
+    console.log(this.state.selectedTags);
+    this.setState({ selectedTags: event.target.value });
+  };
+
+  applyTags(tags) {
+    return (
+      tags &&
+      tags
+        .filter(t => this.state.selectedTags.indexOf(t.id) > -1)
+        .map(t => ({ title: t.title, id: t.id }))
+    );
+  }
+  getBase64Url() {
+    return new Promise(resolve => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        resolve(
+          `data:${this.state.fileSelected.type};base64, ${btoa(
+            e.target.result
+          )}`
+        );
+      };
+      reader.readAsBinaryString(this.state.fileSelected);
+    });
+  }
+
+  handleSelectFile = event => {
+    this.setState({ fileSelected: this.fileInput.current.files[0] });
+  };
+
   render() {
-    const { classes } = this.props;
+    const { classes, updateItem, resetImage, resetItem, tags } = this.props;
+
     return (
       <Grid
         container
@@ -46,13 +115,35 @@ class ShareItemForm extends React.Component {
           validate={formValidation}
           render={({ handleSubmit, form, submitting, pristine, values }) => (
             <form onSubmit={handleSubmit}>
+              <FormSpy
+                subscription={{ values: true }}
+                component={({ values }) => {
+                  if (values) {
+                    this.dispatchUpdate(values, tags, updateItem);
+                  }
+                  return '';
+                }}
+              />
               <Button
                 className={classes.button}
                 variant="contained"
-                href="#contained-buttons"
+                component="span"
+                onClick={() => {
+                  this.fileInput.current.click();
+                }}
               >
                 Select an Image
               </Button>
+              <input
+                hidden
+                type="file"
+                id="fileInput"
+                ref={this.fileInput}
+                accept="image/*"
+                onChange={() => {
+                  this.handleSelectFile();
+                }}
+              />
               <Field name="title" component="input" type="text">
                 {({ input, meta }) => (
                   <div>
@@ -61,7 +152,6 @@ class ShareItemForm extends React.Component {
                       {...input}
                       placeholder="Name your Item"
                     />
-                    {console.log('meta is', meta)}
                     {meta.error &&
                       meta.touched && <span>{meta.itemTitle}</span>}
                   </div>
@@ -70,29 +160,47 @@ class ShareItemForm extends React.Component {
               <Field name="description" component="input" type="text">
                 {({ input, meta }) => (
                   <div>
-                    <TextField
-                      className={classes.formField}
-                      {...input}
-                      placeholder="Describe your Item"
-                    />
-                    {console.log('meta is', meta)}
+                    <TextField className={classes.formField} {...input} />
                     {meta.error &&
                       meta.touched && <span>{meta.itemTitle}</span>}
                   </div>
                 )}
               </Field>
-              <Field name="tags" component="input" type="text">
-                {({ input, meta }) => (
-                  <div>
-                    <TextField select className={classes.formField}>
-                      <TagList />
 
-                      {console.log('meta is', meta)}
-                      {meta.error &&
-                        meta.touched && <span>{meta.itemTitle}</span>}
-                    </TextField>
-                  </div>
-                )}
+              <Field name="tags">
+                {({ input, meta }) => {
+                  return (
+                    <FormControl>
+                      <InputLabel htmlFor="select-multiple-checkbox">
+                        select tags
+                      </InputLabel>
+                      <Select
+                        multiple
+                        className={classes.formField}
+                        value={this.state.selectedTags}
+                        onChange={this.handleSelectTags}
+                        renderValue={selected => {
+                          return this.generateTagsText(tags, selected);
+                        }}
+                      >
+                        {tags &&
+                          tags.map(tag => {
+                            console.log(tag);
+                            return (
+                              <MenuItem key={tag.id} value={tag.id}>
+                                <Checkbox
+                                  checked={
+                                    this.state.selectedTags.indexOf(tag.id) > -1
+                                  }
+                                />
+                                <ListItemText> {tag.title}</ListItemText>
+                              </MenuItem>
+                            );
+                          })}
+                      </Select>
+                    </FormControl>
+                  );
+                }}
               </Field>
 
               <Button type="submit">Submit</Button>
@@ -108,4 +216,24 @@ ShareItemForm.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ShareItemForm);
+const mapDispatchToProps = dispatch => ({
+  /*  This function will provide a prop called 
+    'updateNewItem' to our component. */
+  updateItem(item) {
+    // Inside this function we can dispatch data to our reducer.
+    dispatch(updateItem(item));
+  },
+  resetItem() {
+    dispatch(resetItem());
+  },
+  resetImage() {
+    dispatch(resetImage());
+  }
+
+  // ... other methods
+});
+
+export default connect(
+  undefined,
+  mapDispatchToProps
+)(withStyles(styles)(ShareItemForm));
