@@ -4,7 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import ItemsGrid from '../../components/ItemsGrid/ItemsGrid';
-import MenuBar from '../../components/MenuBar';
+import MenuBar from '../../components/MenuBar/MenuBar';
+
 const Items = ({ classes, history, items }) => {
   return (
     <>
