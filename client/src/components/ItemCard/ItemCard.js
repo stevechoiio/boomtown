@@ -40,6 +40,12 @@ const ItemCard = ({ item, history, classes }) => {
         <Typography component="h1" gutterBottom>
           {item.title}
         </Typography>
+        <Typography>
+          {Math.round(
+            (new Date().getTime() - item.created) / 1000 / 60 / 60 / 24
+          )}{' '}
+          days ago
+        </Typography>
         <Typography variant="h6" gutterBottom>
           {item.description}
         </Typography>

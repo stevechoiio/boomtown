@@ -16,6 +16,7 @@ const ItemFields = gql`
       name
       id
     }
+    created
   }
 `;
 
