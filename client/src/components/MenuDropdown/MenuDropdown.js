@@ -4,6 +4,8 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { LOGOUT_MUTATION } from '../../apollo/queries';
+import { Mutation } from 'react-apollo';
 class MenuDropdown extends React.Component {
   state = {
     anchorEl: null
@@ -36,12 +38,27 @@ class MenuDropdown extends React.Component {
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
-          <MenuItem onClick={this.handleClose}>
+          <MenuItem
+            onClick={() => {
+              console.log('asdf');
+            }}
+          >
             <i className="fas fa-fingerprint" /> Your Profile
           </MenuItem>
-          <MenuItem onClick={this.handleClose}>
-            <i className="fas fa-power-off" /> Sign Out
-          </MenuItem>
+          <Mutation mutation={LOGOUT_MUTATION}>
+            {(logout, { data }) => (
+              <MenuItem
+                onClick={e => {
+                  console.log('signing out!');
+                  e.preventDefault();
+                  logout();
+                  window.location.reload();
+                }}
+              >
+                <i className="fas fa-power-off" /> Sign Out
+              </MenuItem>
+            )}
+          </Mutation>
         </Menu>
       </div>
     );

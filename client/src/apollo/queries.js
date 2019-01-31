@@ -78,23 +78,22 @@ export const ADD_ITEM_MUTATION = gql`
 //  */
 
 export const VIEWER_QUERY = gql`
-  query {
-    user {
+  query viewerQuery {
+    viewer {
       id
       email
       name
-      bio
     }
   }
 `;
 export const LOGOUT_MUTATION = gql`
-  mutation {
+  mutation logout {
     logout
   }
 `;
 
 export const SIGNUP_MUTATION = gql`
-  mutation signup($user: SignupInput!) {
+  mutation signup($user: NewUser!) {
     signup(user: $user)
   }
 `;

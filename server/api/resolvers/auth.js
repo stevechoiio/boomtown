@@ -77,7 +77,6 @@ module.exports = app => {
         const user = await context.pgResource.getUserAndPasswordForVerification(
           args.user.email
         );
-        console.log(user);
 
         const passwordMatch = await bcrypt.compare(
           args.user.password,

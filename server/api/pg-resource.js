@@ -21,7 +21,6 @@ module.exports = postgres => {
             'INSERT INTO users (name,email,password) VALUES ($1,$2,$3) RETURNING *;', // @TODO: Authentication - Server
           values: [name, email, password]
         };
-        console.log(newUserInsert);
 
         const user = await postgres.query(newUserInsert);
         return user.rows[0];
@@ -44,7 +43,7 @@ module.exports = postgres => {
 
       try {
         const user = await postgres.query(findUserQuery);
-        console.log(user);
+
         if (!user) throw 'User was not found.';
         return user.rows[0];
       } catch (e) {

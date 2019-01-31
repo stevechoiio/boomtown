@@ -100,7 +100,15 @@ class AccountForm extends Component {
                         });
                       } // TODO ::get login form inputs
                       else {
-                        this.props.signupMutation({ variables: '' });
+                        this.props.signupMutation({
+                          variables: {
+                            user: {
+                              email: 'abbbbb',
+                              password: '13243232',
+                              name: 'testing'
+                            }
+                          }
+                        });
                       }
                     }} //TODO: get singup login form inputs
                     color="secondary"
@@ -140,11 +148,24 @@ class AccountForm extends Component {
 }
 
 // @TODO: Refetch the VIEWER_QUERY to reload the app and access authenticated routes.
+
+const refetchQueries = [
+  {
+    query: VIEWER_QUERY
+  }
+];
+
 export default compose(
   graphql(SIGNUP_MUTATION, {
+    options: {
+      refetchQueries
+    },
     name: 'signupMutation'
   }),
   graphql(LOGIN_MUTATION, {
+    options: {
+      refetchQueries
+    },
     name: 'loginMutation'
   }),
   withStyles(styles)
