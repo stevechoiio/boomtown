@@ -28,7 +28,7 @@ class AccountForm extends Component {
 
   render() {
     const { classes } = this.props;
-
+    console.log(this.props);
     return (
       <Form
         render={({ handleSubmit, pristine, invalid }) => {
@@ -92,6 +92,17 @@ class AccountForm extends Component {
                     className={classes.formButton}
                     variant="contained"
                     size="large"
+                    onClick={e => {
+                      e.preventDefault();
+                      if (this.state.formToggle) {
+                        this.props.loginMutation({
+                          variables: { user: { email: 'a', password: '1324' } }
+                        });
+                      } // TODO ::get login form inputs
+                      else {
+                        this.props.signupMutation({ variables: '' });
+                      }
+                    }} //TODO: get singup login form inputs
                     color="secondary"
                     disabled={
                       false // @TODO: This prop should depend on pristine or valid state of form
@@ -128,6 +139,13 @@ class AccountForm extends Component {
   }
 }
 
-// @TODO: Use compose to add the login and signup mutations to this components props.
 // @TODO: Refetch the VIEWER_QUERY to reload the app and access authenticated routes.
-export default withStyles(styles)(AccountForm);
+export default compose(
+  graphql(SIGNUP_MUTATION, {
+    name: 'signupMutation'
+  }),
+  graphql(LOGIN_MUTATION, {
+    name: 'loginMutation'
+  }),
+  withStyles(styles)
+)(AccountForm);

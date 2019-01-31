@@ -19,7 +19,8 @@ function setCookie({ tokenName, token, res }) {
   // Refactor this method with the correct configuration values.
 
   res.cookie(tokenName, token, {
-    maxAge: 1000 * 60 * 120
+    maxAge: 1000 * 60 * 120,
+    httpOnly: true
   });
   // -------------------------------
 }
