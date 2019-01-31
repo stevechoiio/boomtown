@@ -1,11 +1,6 @@
 const strs = require('stringstream');
 
 function tagsQueryString(tags, itemid, result) {
-  /**
-   * Challenge:
-   * This function is recursive, and a little complicated.
-   * Can you refactor it to be simpler / more readable?
-   */
   const length = tags.length;
   return length === 0
     ? `${result};`
@@ -19,12 +14,15 @@ function tagsQueryString(tags, itemid, result) {
 
 module.exports = postgres => {
   return {
-    async createUser({ fullname, email, password }) {
-      const newUserInsert = {
-        text: 'INSERT ', // @TODO: Authentication - Server
-        values: [fullname, email, password]
-      };
+    async createUser({ name, email, password }) {
       try {
+        const newUserInsert = {
+          text:
+            'INSERT INTO users (name,email,password) VALUES ($1,$2,$3) RETURNING *;', // @TODO: Authentication - Server
+          values: [name, email, password]
+        };
+        console.log(newUserInsert);
+
         const user = await postgres.query(newUserInsert);
         return user.rows[0];
       } catch (e) {
@@ -40,11 +38,13 @@ module.exports = postgres => {
     },
     async getUserAndPasswordForVerification(email) {
       const findUserQuery = {
-        text: 'INSERT ', // @TODO: Authentication - Server
+        text: 'SELECT * FROM users WHERE email=($1);',
         values: [email]
       };
+
       try {
         const user = await postgres.query(findUserQuery);
+        console.log(user);
         if (!user) throw 'User was not found.';
         return user.rows[0];
       } catch (e) {
@@ -183,6 +183,30 @@ module.exports = postgres => {
 
             const newItemTag = await postgres.query(newItemTagQuery);
 
+            resolve(newItem);
+          } catch (e) {
+            // Something went wrong
+            client.query('ROLLBACK', err => {
+              if (err) {
+                reject(err);
+              }
+              // release the client back to the pool
+              done();
+            });
+            switch (true) {
+              case /uploads_itemid_key/.test(e.message):
+                throw 'This item already has an image.';
+              default:
+                throw e;
+            }
+          }
+        });
+      });
+    },
+    async saveNewUser({ fullname, email, password }) {
+      return new Promise((resolve, reject) => {
+        postgres.connect(async (err, client, done) => {
+          try {
             resolve(newItem);
           } catch (e) {
             // Something went wrong

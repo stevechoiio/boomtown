@@ -14,7 +14,6 @@ class ShareContainer extends Component {
         <MenuBar />
         <Query query={ALL_TAGS_QUERY}>
           {({ loading, error, data }) => {
-            console.log('data is:', data);
             if (loading) return 'Loading...';
             if (error) return `Error! ${error.message}`;
 

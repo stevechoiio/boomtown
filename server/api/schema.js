@@ -62,6 +62,15 @@ module.exports = gql`
     description: String
     tags: [AssignedTag]
   }
+  input NewUser {
+    name: String!
+    email: String!
+    password: String!
+  }
+  input LoginInput {
+    email: String!
+    password: String!
+  }
   input NewDateInput {
     date: Date!
   }
@@ -75,22 +84,8 @@ module.exports = gql`
 
   type Mutation {
     addItem(item: NewItemInput!): Item
+    signup(user: NewUser!): ID!
+    login(user: LoginInput!): ID!
+    logout: Boolean
   }
 `;
-
-/*
-mutation newItem($title:String!,
-  $description:String,
-  $tags: [AssignedTag]){
-  addItem(item: {
-    title:$title
-    description:$description
-    tags:$tags}
-  ){
-    id
-    title
-    description
-    created
-  }}
-
-*/

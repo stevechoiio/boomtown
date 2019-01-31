@@ -11,11 +11,12 @@ const styles = {
   card: {
     minWidth: 250,
     maxWidth: 400,
-    height: 500
+    minHeight: 500
   },
   media: {
     height: 230
-  }
+  },
+  button: { marginBottom: 100, marginLeft: 20 }
 };
 
 const ItemCard = ({ item, history, classes }) => {
@@ -39,14 +40,12 @@ const ItemCard = ({ item, history, classes }) => {
         <Typography component="h1" gutterBottom>
           {item.title}
         </Typography>
-
-        {item.tags.map(tag => {
-          return <Typography variant="caption">{tag.title}</Typography>;
-        })}
-
         <Typography variant="h6" gutterBottom>
           {item.description}
         </Typography>
+        {item.tags.map(tag => {
+          return <Typography variant="caption">{tag.title}</Typography>;
+        })}
       </CardContent>
       <Button className={classes.button} variant="outlined">
         Borrow
