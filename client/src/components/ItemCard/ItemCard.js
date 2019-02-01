@@ -14,7 +14,7 @@ const styles = {
   card: {
     minWidth: 250,
     maxWidth: 400,
-    minHeight: 500
+    height: 600
   },
   media: {
     height: 230
@@ -30,7 +30,10 @@ const ItemCard = ({ item, history, classes }) => {
       }}
       className={classes.card}
     >
-      <CardMedia className={classes.media} image={item.imageurl} />
+      <CardMedia
+        className={classes.media}
+        image="https://en.wikipedia.org/wiki/File:Welchcorgipembroke.JPG"
+      />
 
       <CardContent>
         <ViewerContext.Consumer>

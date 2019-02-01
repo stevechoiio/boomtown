@@ -17,7 +17,7 @@ const ItemsGrid = ({ items, classes, history }) => {
         spacing={24}
       >
         {items.map(item => (
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={4} key={item.id}>
             <ItemCard item={item} history={history} />
           </Grid>
         ))}

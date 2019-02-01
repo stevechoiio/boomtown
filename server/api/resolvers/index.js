@@ -40,7 +40,6 @@ module.exports = app => {
       async user(parent, { id }, { pgResource }, info) {
         try {
           const user = await pgResource.getUserById(id);
-
           return user.rows[0];
         } catch (e) {
           throw new ApolloError(e);
