@@ -6,7 +6,6 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import React, { Component } from 'react';
 import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import {
   LOGIN_MUTATION,
@@ -132,7 +131,6 @@ class AccountForm extends Component {
                         ? 'Create an account.'
                         : 'Login to existing account.'}
                     </button>
-                    <Link to="/items">enter</Link>
                   </Typography>
                 </Grid>
               </FormControl>

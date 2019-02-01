@@ -7,6 +7,9 @@ import { withStyles } from '@material-ui/core';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import { ViewerContext } from '../../context//ViewerProvider';
+import TimeCalculator from './TimeCalculator';
+
 const styles = {
   card: {
     minWidth: 250,
@@ -28,23 +31,29 @@ const ItemCard = ({ item, history, classes }) => {
       className={classes.card}
     >
       <CardMedia className={classes.media} image={item.imageurl} />
+
       <CardContent>
-        <Gravatar
-          style={{ borderRadius: '30px' }}
-          email={item.itemowner.id}
-          default="retro"
-        />
-        <Typography variant="h6" gutterBottom>
-          {item.itemowner.name}
-        </Typography>
+        <ViewerContext.Consumer>
+          {({ viewer, loading }) => {
+            return (
+              <>
+                <Gravatar
+                  style={{ borderRadius: '30px' }}
+                  email={item.itemowner.id}
+                  default="retro"
+                />
+                <Typography variant="h6" gutterBottom>
+                  {item.itemowner.name ? item.itemowner.name : viewer.name}
+                </Typography>
+              </>
+            );
+          }}
+        </ViewerContext.Consumer>
         <Typography component="h1" gutterBottom>
           {item.title}
         </Typography>
         <Typography>
-          {Math.round(
-            (new Date().getTime() - item.created) / 1000 / 60 / 60 / 24
-          )}{' '}
-          days ago
+          <TimeCalculator time={item.created} />
         </Typography>
         <Typography variant="h6" gutterBottom>
           {item.description}

@@ -144,7 +144,7 @@ class ShareItemForm extends React.Component {
             reset
           }) => (
             <Mutation mutation={ADD_ITEM_MUTATION}>
-              {(addItem, { data }) => (
+              {addItem => (
                 <div>
                   <form
                     onSubmit={e => {

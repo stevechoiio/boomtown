@@ -35,33 +35,3 @@ export default () => (
     </ViewerContext.Consumer>
   </Fragment>
 );
-
-// {({ viewer, loading }) => {
-//   {
-//     return !viewer ? (
-//       <Switch>
-//         <Route exact path="/welcome" component={HomeContainer} />
-//         <Redirect from="*" to="/welcome" />
-//       </Switch>
-//     ) : (
-//       <Switch>
-//         <Route exact path="/items" component={ItemsContainer} />
-//         <Route exact path="/share" component={ShareContainer} />
-//         <Route exact path="/profile" component={ProfileContainer} />
-//         <Route exact path="/share" component={Share} />
-//         <Route path="/profile/:id" component={ProfileContainer} />
-//         <Redirect from="*" to="/items" />
-//       </Switch>
-
-{
-  /* <Switch>
-<Route exact path="/items" component={ItemsContainer} />
-<Route exact path="/welcome" component={HomeContainer} />
-<Route exact path="/share" component={ShareContainer} />
-<Route exact path="/profile" component={ProfileContainer} />
-<Route exact path="/share" component={Share} />
-<Route path="/profile/:id" component={ProfileContainer} />
-<Redirect path="/items" />
-<Redirect from="/" to="/welcome" />
-</Switch> */
-}
