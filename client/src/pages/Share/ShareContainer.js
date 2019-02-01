@@ -11,7 +11,6 @@ class ShareContainer extends Component {
   render() {
     return (
       <>
-        <MenuBar />
         <Query query={ALL_TAGS_QUERY}>
           {({ loading, error, data }) => {
             if (loading) return 'Loading...';

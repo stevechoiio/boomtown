@@ -7,6 +7,7 @@ import ProfileContainer from '../pages/Profile/ProfileContainer';
 import ItemsContainer from '../pages/Items/ItemsContainer';
 import Share from '../pages/Share/ShareContainer';
 import { ViewerContext } from '../context/ViewerProvider';
+import MenuBar from '../components/MenuBar/MenuBar';
 
 export default () => (
   <Fragment>
@@ -16,6 +17,7 @@ export default () => (
         if (viewer) {
           return (
             <Switch>
+              <MenuBar />
               <Route exact path="/items" component={ItemsContainer} />
               <Route exact path="/share" component={ShareContainer} />
               <Route exact path="/profile" component={ProfileContainer} />

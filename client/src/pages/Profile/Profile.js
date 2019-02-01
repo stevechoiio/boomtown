@@ -16,7 +16,6 @@ import ProfileCard from '../../components/ProfileCard/ProfileCard';
 const Profile = ({ classes, id, user, history, styles }) => {
   return (
     <div>
-      <MenuBar />
       <ProfileCard user={user} history={history} id={id} />
     </div>
   );
