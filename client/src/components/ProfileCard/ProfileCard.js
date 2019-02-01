@@ -18,7 +18,11 @@ const ProfileCard = ({ user, history }) => {
     <Grid container>
       <Grid item>
         <Card style={{ width: '90vw' }}>
-          <Gravatar email={user.name} default="retro" />
+          <Gravatar
+            email={user.id}
+            style={{ borderRadius: '30px' }}
+            default="retro"
+          />
           <CardContent>
             <Typography component="h4" variant="display4">
               {user.name}

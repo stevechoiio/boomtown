@@ -1,11 +1,15 @@
 export default function validate(values) {
   const errors = {};
+  console.log('value in validation is:', values);
+  if (!values.title) {
+    errors.title = 'Title Required';
+  }
+  if (!values.description) {
+    errors.description = 'Description Required';
+  }
 
-  /**
-   * @TODO: Write the validation rules for the share form.
-   *
-   * An item title, description, and at least one tag is required for all items.
-   */
+  console.log('error is:');
+  console.log(errors);
 
   return errors;
 }

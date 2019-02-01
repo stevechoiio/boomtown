@@ -19,24 +19,7 @@ import {
   resetItem,
   resetImage
 } from '../../redux/modules/ShareItem';
-
-const formValidation = (values, tags, image) => {
-  const errors = {};
-  if (!values.title) {
-    errors.itemTitle = 'Title Required';
-  }
-  if (!values.description) {
-    errors.description = 'Description Required';
-  }
-  if (!tags) {
-    errors.description = 'Required';
-  }
-  if (!image) {
-    errors.image = 'Required';
-  }
-  console.log(errors);
-  return errors;
-};
+import validate from './helpers/validation';
 
 class ShareItemForm extends React.Component {
   constructor(props) {
@@ -128,7 +111,7 @@ class ShareItemForm extends React.Component {
         <Form
           onSubmit={this.onSubmit}
           validate={value => {
-            return formValidation(
+            return validate(
               value,
               this.state.selectedTags,
               this.state.fileSelected
@@ -219,8 +202,13 @@ class ShareItemForm extends React.Component {
                             {...input}
                             placeholder="Name your Item"
                           />
+                          {console.log('meta is', meta)}
+                          {console.log(
+                            'error in form for title is ',
+                            meta.error
+                          )}
                           {meta.error &&
-                            meta.touched && <span>{meta.itemTitle}</span>}
+                            meta.touched && <span>{meta.error}</span>}
                         </div>
                       )}
                     </Field>
@@ -228,10 +216,10 @@ class ShareItemForm extends React.Component {
                       {({ input, meta }) => (
                         <div>
                           <TextField className={classes.formField} {...input} />
-
                           {console.log('meta is', meta)}
+                          {console.log('error in form is ', meta.error)}
                           {meta.error &&
-                            meta.touched && <span>{meta.description}</span>}
+                            meta.touched && <span>{meta.error}</span>}
                         </div>
                       )}
                     </Field>
@@ -273,7 +261,9 @@ class ShareItemForm extends React.Component {
                       }}
                     </Field>
                     <div />
-                    <Button type="submit">Submit</Button>
+                    <Button disabled={submitting || pristine} type="submit">
+                      Submit
+                    </Button>
                   </form>
                 </div>
               )}

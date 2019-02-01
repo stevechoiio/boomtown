@@ -8,12 +8,12 @@ import ItemsContainer from '../pages/Items/ItemsContainer';
 import Share from '../pages/Share/ShareContainer';
 import { ViewerContext } from '../context/ViewerProvider';
 import MenuBar from '../components/MenuBar/MenuBar';
-
+import LoadingCircle from '../components/Loading/Loading';
 export default () => (
   <Fragment>
     <ViewerContext.Consumer>
       {({ viewer, loading }) => {
-        if (loading) return <div>?</div>;
+        if (loading) return 'loading';
         if (viewer) {
           return (
             <>

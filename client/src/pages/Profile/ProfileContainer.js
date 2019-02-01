@@ -6,6 +6,7 @@ import styles from './styles';
 import { Query } from 'react-apollo';
 import { ALL_USER_ITEMS_QUERY } from '../../apollo/queries';
 import { withRouter } from 'react-router-dom';
+import LoadingCircle from '../../components/Loading/Loading';
 class ProfileContainer extends Component {
   render() {
     return (
@@ -14,7 +15,7 @@ class ProfileContainer extends Component {
         query={ALL_USER_ITEMS_QUERY}
       >
         {({ loading, error, data }) => {
-          if (loading) return 'Loading...';
+          if (loading) return <LoadingCircle />;
           if (error) return `Error! ${error.message}`;
           const { user } = data;
           return <Profile user={user} />;

@@ -58,9 +58,17 @@ const ItemCard = ({ item, history, classes }) => {
         <Typography variant="h6" gutterBottom>
           {item.description}
         </Typography>
-        {item.tags.map(tag => {
+        {/* {item.tags.map(tag => {
           return <Typography variant="caption">{tag.title}</Typography>;
-        })}
+        })} */}
+
+        <Typography>
+          {item.tags
+            .map(tag => {
+              return tag.title;
+            })
+            .join(', ')}
+        </Typography>
       </CardContent>
       <Button className={classes.button} variant="outlined">
         Borrow

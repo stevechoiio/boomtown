@@ -9,7 +9,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
-
+import LoadingCircle from '../../components/Loading/Loading';
 const styles = theme => ({
   root: {
     display: 'flex'
@@ -25,7 +25,7 @@ const TagList = ({ classes }) => {
       <Query query={ALL_TAGS_QUERY}>
         {({ loading, error, data }) => {
           console.log('data is:', data);
-          if (loading) return 'Loading...';
+          if (loading) return <LoadingCircle />;
           if (error) return `Error! ${error.message}`;
 
           return (

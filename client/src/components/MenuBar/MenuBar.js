@@ -25,18 +25,18 @@ const styles = {
 
 const ButtonAppBar = props => {
   const { classes, history } = props;
-  console.log('history is:');
+
   const viewToggle = history.location.pathname === '/share';
-  console.log(viewToggle);
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Link to="/items">
-            <IconButton>
-              <img src="../../images/boomtown.svg" />
-            </IconButton>
-          </Link>
+          <IconButton>
+            <Link to="/items">
+              <img src="../../images/boomtown.svg" alt="B" />
+            </Link>
+          </IconButton>
 
           {!viewToggle ? (
             <Button color="inherit">

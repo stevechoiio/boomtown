@@ -14,7 +14,7 @@ import {
 } from '../../apollo/queries';
 import { graphql, compose } from 'react-apollo';
 import validate from './helpers/validation';
-
+import TextField from '@material-ui/core/TextField';
 import styles from './styles';
 
 class AccountForm extends Component {
@@ -27,56 +27,83 @@ class AccountForm extends Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.props);
+
     return (
       <Form
-        render={({ handleSubmit, pristine, invalid }) => {
+        onSubmit={() => {}}
+        render={({ handleSubmit, reset, submitting, pristine, values }) => {
           return (
             <form
-              onSubmit={() => {
-                console.log('Submitted');
+              onSubmit={e => {
+                e.preventDefault();
+                const { password, email, fullname } = values;
+
+                console.log('values');
+                if (this.state.formToggle) {
+                  console.log('logging in');
+                  console.log(`password is: ${password}`);
+                  console.log(`email is: ${email}`);
+                  this.props.loginMutation({
+                    variables: {
+                      user: { email, password }
+                    }
+                  });
+                } else {
+                  console.log('singing upt');
+                  this.props.signupMutation({
+                    variables: {
+                      user: {
+                        email,
+                        password,
+
+                        name: fullname
+                      }
+                    }
+                  });
+                }
               }}
               className={classes.accountForm}
             >
               {!this.state.formToggle && (
                 <FormControl fullWidth className={classes.formControl}>
                   <InputLabel htmlFor="fullname">Username</InputLabel>
-                  <Form>
-                    <Input
-                      id="fullname"
-                      type="text"
-                      inputProps={{
-                        autoComplete: 'off'
-                      }}
-                      value={''}
-                    />
-                  </Form>
+                  <Field name="fullname" component="input">
+                    {({ input, meta }) => (
+                      <Input
+                        {...input}
+                        inputProps={{
+                          'aria-label': 'Description'
+                        }}
+                      />
+                    )}
+                  </Field>
                 </FormControl>
               )}
               <FormControl fullWidth className={classes.formControl}>
                 <InputLabel htmlFor="email">Email</InputLabel>
-                <Field>
-                  <Input
-                    id="email"
-                    type="text"
-                    inputProps={{
-                      autoComplete: 'off'
-                    }}
-                    value={''}
-                  />
+                <Field name="email" component="input">
+                  {({ input, meta }) => (
+                    <Input
+                      {...input}
+                      inputProps={{
+                        'aria-label': 'Description'
+                      }}
+                    />
+                  )}
                 </Field>
               </FormControl>
               <FormControl fullWidth className={classes.formControl}>
                 <InputLabel htmlFor="password">Password</InputLabel>
-                <Field>
-                  <Input
-                    id="password"
-                    type="password"
-                    inputProps={{
-                      autoComplete: 'off'
-                    }}
-                    value={''}
-                  />
+                <Field name="password" component="input">
+                  {({ input, meta }) => (
+                    <Input
+                      {...input}
+                      type="password"
+                      inputProps={{
+                        'aria-label': 'Description'
+                      }}
+                    />
+                  )}
                 </Field>
               </FormControl>
               <FormControl className={classes.formControl}>
@@ -91,29 +118,8 @@ class AccountForm extends Component {
                     className={classes.formButton}
                     variant="contained"
                     size="large"
-                    onClick={e => {
-                      e.preventDefault();
-                      if (this.state.formToggle) {
-                        this.props.loginMutation({
-                          variables: { user: { email: 'a', password: '1324' } }
-                        });
-                      } // TODO ::get login form inputs
-                      else {
-                        this.props.signupMutation({
-                          variables: {
-                            user: {
-                              email: 'abbbbb',
-                              password: '13243232',
-                              name: 'testing'
-                            }
-                          }
-                        });
-                      }
-                    }} //TODO: get singup login form inputs
                     color="secondary"
-                    disabled={
-                      false // @TODO: This prop should depend on pristine or valid state of form
-                    }
+                    disabled={pristine}
                   >
                     {this.state.formToggle ? 'Enter' : 'Create Account'}
                   </Button>
@@ -122,6 +128,7 @@ class AccountForm extends Component {
                       className={classes.formToggle}
                       type="button"
                       onClick={() => {
+                        reset();
                         this.setState({
                           formToggle: !this.state.formToggle
                         });
@@ -141,18 +148,19 @@ class AccountForm extends Component {
           );
         }}
       />
+
+      // @TODO: Close Final Form <Form />
     );
   }
 }
-
-// @TODO: Refetch the VIEWER_QUERY to reload the app and access authenticated routes.
 
 const refetchQueries = [
   {
     query: VIEWER_QUERY
   }
 ];
-
+// @TODO: Use compose to add the login and signup mutations to this components props.
+// @TODO: Refetch the VIEWER_QUERY to reload the app and access authenticated routes.
 export default compose(
   graphql(SIGNUP_MUTATION, {
     options: {

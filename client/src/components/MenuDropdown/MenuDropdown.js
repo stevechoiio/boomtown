@@ -50,7 +50,8 @@ class MenuDropdown extends React.Component {
                         console.log('asdf');
                       }}
                     >
-                      <i className="fas fa-fingerprint" /> Your Profile
+                      <i className="fas fa-fingerprint" /> &nbsp;&nbsp;Your
+                      Profile
                     </MenuItem>
                   </Link>
                 </>
@@ -68,7 +69,7 @@ class MenuDropdown extends React.Component {
                   window.location.reload();
                 }}
               >
-                <i className="fas fa-power-off" /> Sign Out
+                <i className="fas fa-power-off" />&nbsp;&nbsp;Sign Out
               </MenuItem>
             )}
           </Mutation>
