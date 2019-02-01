@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-
+import { withRouter } from 'react-router';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -24,7 +24,10 @@ const styles = {
 };
 
 const ButtonAppBar = props => {
-  const { classes } = props;
+  const { classes, history } = props;
+  console.log('history is:');
+  const viewToggle = history.location.pathname === '/share';
+  console.log(viewToggle);
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -35,11 +38,15 @@ const ButtonAppBar = props => {
             </IconButton>
           </Link>
 
-          <Button color="inherit">
-            <Link to="/share">
-              <i className="fas fa-plus-circle" />Share an Item{' '}
-            </Link>
-          </Button>
+          {!viewToggle ? (
+            <Button color="inherit">
+              <Link to="/share">
+                <i className="fas fa-plus-circle" />Share an Item{' '}
+              </Link>
+            </Button>
+          ) : (
+            ''
+          )}
 
           <MenuDropdown />
         </Toolbar>
@@ -52,4 +59,4 @@ ButtonAppBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ButtonAppBar);
+export default withRouter(withStyles(styles)(ButtonAppBar));

@@ -6,6 +6,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { LOGOUT_MUTATION } from '../../apollo/queries';
 import { Mutation } from 'react-apollo';
+import { Link } from 'react-router-dom';
+import { ViewerContext } from '../../context/ViewerProvider';
 class MenuDropdown extends React.Component {
   state = {
     anchorEl: null
@@ -38,13 +40,24 @@ class MenuDropdown extends React.Component {
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
-          <MenuItem
-            onClick={() => {
-              console.log('asdf');
+          <ViewerContext.Consumer>
+            {({ viewer, loading }) => {
+              return (
+                <>
+                  <Link to={`/profile/${viewer.id}`}>
+                    <MenuItem
+                      onClick={() => {
+                        console.log('asdf');
+                      }}
+                    >
+                      <i className="fas fa-fingerprint" /> Your Profile
+                    </MenuItem>
+                  </Link>
+                </>
+              );
             }}
-          >
-            <i className="fas fa-fingerprint" /> Your Profile
-          </MenuItem>
+          </ViewerContext.Consumer>
+
           <Mutation mutation={LOGOUT_MUTATION}>
             {(logout, { data }) => (
               <MenuItem
