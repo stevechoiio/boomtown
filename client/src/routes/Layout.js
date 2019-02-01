@@ -16,14 +16,16 @@ export default () => (
         if (loading) return <div>?</div>;
         if (viewer) {
           return (
-            <Switch>
+            <>
               <MenuBar />
-              <Route exact path="/items" component={ItemsContainer} />
-              <Route exact path="/share" component={ShareContainer} />
-              <Route exact path="/profile" component={ProfileContainer} />
-              <Route path="/profile/:id" component={ProfileContainer} />
-              <Redirect from="*" to="/items" />
-            </Switch>
+              <Switch>
+                <Route exact path="/items" component={ItemsContainer} />
+                <Route exact path="/share" component={ShareContainer} />
+                <Route exact path="/profile" component={ProfileContainer} />
+                <Route path="/profile/:id" component={ProfileContainer} />
+                <Redirect from="*" to="/items" />
+              </Switch>
+            </>
           );
         } else {
           return (
