@@ -32,7 +32,7 @@ const ItemCard = ({ item, history, classes }) => {
     >
       <CardMedia
         className={classes.media}
-        image="https://en.wikipedia.org/wiki/File:Welchcorgipembroke.JPG"
+        image="www.en.wikipedia.org/wiki/File:Welchcorgipembroke.JPG"
       />
 
       <CardContent>
@@ -61,10 +61,6 @@ const ItemCard = ({ item, history, classes }) => {
         <Typography variant="h6" gutterBottom>
           {item.description}
         </Typography>
-        {/* {item.tags.map(tag => {
-          return <Typography variant="caption">{tag.title}</Typography>;
-        })} */}
-
         <Typography>
           {item.tags
             .map(tag => {

@@ -15,8 +15,8 @@ const styles = {
 
 const ProfileCard = ({ user, history }) => {
   return (
-    <Grid container>
-      <Grid item>
+    <Grid fullwidth alignContent="center">
+      <Grid item alignContent="center">
         <Card style={{ width: '90vw' }}>
           <Gravatar
             email={user.id}
@@ -54,4 +54,4 @@ const ProfileCard = ({ user, history }) => {
   );
 };
 
-export default ProfileCard;
+export default withStyles(styles)(ProfileCard);
