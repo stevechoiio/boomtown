@@ -3,7 +3,6 @@ import Share from './Share';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import MenuBar from '../../components/MenuBar/MenuBar';
-// import FullScreenLoader from '../../components/FullScreenLoader';
 import { Query } from 'react-apollo';
 import { ALL_TAGS_QUERY } from '../../apollo/queries';
 import LoadingCircle from '../../components/Loading/Loading';

@@ -17,6 +17,7 @@ const ItemFields = gql`
       id
     }
     created
+    imageurl
   }
 `;
 

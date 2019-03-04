@@ -8,16 +8,15 @@ import { withStyles } from '@material-ui/core';
 import Gravatar from 'react-gravatar';
 const styles = {
   card: {
-    Width: 800,
-    height: 400
+    Width: '100%'
   }
 };
 
-const ProfileCard = ({ user, history }) => {
+const ProfileCard = ({ user, history, classes }) => {
   return (
-    <Grid fullwidth alignContent="center">
-      <Grid item alignContent="center">
-        <Card style={{ width: '90vw' }}>
+    <Grid alignContent="center">
+      <Grid fullwidth item alignContent="center">
+        <Card className={classes.card}>
           <Gravatar
             email={user.id}
             style={{ borderRadius: '30px' }}
@@ -44,7 +43,7 @@ const ProfileCard = ({ user, history }) => {
         </Card>
       </Grid>
 
-      <Grid container>
+      <Grid>
         <Typography component="h2" variant="h1">
           Shared items:
         </Typography>

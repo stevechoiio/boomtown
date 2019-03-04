@@ -24,7 +24,6 @@ const TagList = ({ classes }) => {
     <div>
       <Query query={ALL_TAGS_QUERY}>
         {({ loading, error, data }) => {
-          console.log('data is:', data);
           if (loading) return <LoadingCircle />;
           if (error) return `Error! ${error.message}`;
 

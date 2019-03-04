@@ -7,17 +7,15 @@ import ItemCard from '../ItemCard/ItemCard';
 
 const ItemsGrid = ({ items, classes, history }) => {
   return (
-    <div className={classes.root}>
+    <div>
       <Grid
+        className={classes.media}
         container
-        className={classes.root}
-        direction="row"
-        alignItems="center"
-        justify="left"
-        spacing={24}
+        alignItems="flex-start"
+        spacing={16}
       >
         {items.map(item => (
-          <Grid item xs={12} sm={6} md={4} key={item.id}>
+          <Grid item xs={12} md={6} lg={4} key={item.id}>
             <ItemCard item={item} history={history} />
           </Grid>
         ))}

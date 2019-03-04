@@ -9,7 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from 'react-router-dom';
 import MenuDropdown from '../MenuDropdown/MenuDropdown';
-
+import logo from '../../images/boomtown.svg';
+import Slide from '@material-ui/core/Slide';
 const styles = {
   root: {
     flexGrow: 1
@@ -18,13 +19,16 @@ const styles = {
     flexGrow: 1
   },
   menuButton: {
-    marginLeft: -12,
-    marginRight: 20
+    marginRight: 5,
+    paddingRight: 10
+  },
+  logo: {
+    maxWidth: '90%'
   }
 };
 
 const ButtonAppBar = props => {
-  const { classes, history } = props;
+  const { classes, history, location } = props;
 
   const viewToggle = history.location.pathname === '/share';
 
@@ -34,21 +38,27 @@ const ButtonAppBar = props => {
         <Toolbar>
           <IconButton>
             <Link to="/items">
-              <img src="../../images/boomtown.svg" alt="B" />
+              <img src={logo} className={classes.logo} />
             </Link>
           </IconButton>
 
           {!viewToggle ? (
-            <Button color="inherit">
-              <Link to="/share">
-                <i className="fas fa-plus-circle" />Share an Item{' '}
-              </Link>
-            </Button>
+            <Slide
+              direction="left"
+              in={location.pathname !== '/share'}
+              unmountOnExit
+            >
+              <Button size="small" className={classes.menuButton}>
+                <Link to="/share">
+                  <i className="fas fa-plus-circle" /> &nbsp;Share an Item{' '}
+                </Link>
+              </Button>
+            </Slide>
           ) : (
             ''
           )}
 
-          <MenuDropdown />
+          <MenuDropdown className={classes.menuButton} />
         </Toolbar>
       </AppBar>
     </div>

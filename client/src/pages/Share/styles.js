@@ -1,5 +1,3 @@
-import { withTheme } from '@material-ui/core';
-
 const styles = theme => ({
   root: {
     flexGrow: 1,

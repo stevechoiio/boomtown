@@ -10,19 +10,26 @@ import Button from '@material-ui/core/Button';
 import { ViewerContext } from '../../context//ViewerProvider';
 import TimeCalculator from './TimeCalculator';
 
+import CardHeader from '@material-ui/core/CardHeader';
+
+import IconButton from '@material-ui/core/IconButton';
+
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 const styles = {
   card: {
-    minWidth: 250,
-    maxWidth: 400,
-    height: 600
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column'
   },
   media: {
-    height: 230
+    height: 0,
+    paddingTop: '56.25%' // 16:9
   },
-  button: { marginBottom: 100, marginLeft: 20 }
+  button: { marginBottom: 100, margin: 50 }
 };
 
 const ItemCard = ({ item, history, classes }) => {
+  console.log(item);
   return (
     <Card
       onClick={() => {
@@ -32,32 +39,40 @@ const ItemCard = ({ item, history, classes }) => {
     >
       <CardMedia
         className={classes.media}
-        image="www.en.wikipedia.org/wiki/File:Welchcorgipembroke.JPG"
+        image={item.imageurl}
+        title={item.title}
       />
 
       <CardContent>
         <ViewerContext.Consumer>
           {({ viewer, loading }) => {
             return (
-              <>
-                <Gravatar
-                  style={{ borderRadius: '30px' }}
-                  email={item.itemowner.id}
-                  default="retro"
-                />
-                <Typography variant="h6" gutterBottom>
-                  {item.itemowner.name ? item.itemowner.name : viewer.name}
-                </Typography>
-              </>
+              <CardHeader
+                title={
+                  <Typography>
+                    {item.itemowner.name ? item.itemowner.name : viewer.name}
+                  </Typography>
+                }
+                subheader={
+                  <Typography>
+                    <TimeCalculator time={item.created} />
+                  </Typography>
+                }
+                avatar={
+                  <Gravatar
+                    style={{ borderRadius: '30px' }}
+                    email={item.itemowner.id}
+                    default="retro"
+                  />
+                }
+              />
             );
           }}
         </ViewerContext.Consumer>
         <Typography component="h1" gutterBottom>
           {item.title}
         </Typography>
-        <Typography>
-          <TimeCalculator time={item.created} />
-        </Typography>
+
         <Typography variant="h6" gutterBottom>
           {item.description}
         </Typography>

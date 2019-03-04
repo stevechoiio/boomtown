@@ -1,22 +1,5 @@
-/**
- *  @TODO: Handling Server Errors
- *
- *  Once you've completed your pg-resource.js methods and handled errors
- *  use the ApolloError constructor to capture and return errors from your resolvers.
- *
- *  Throwing ApolloErrors from your resolvers is a nice pattern to follow and
- *  will help you easily debug problems in your resolving functions.
- *
- *  It will also help you control th error output of your resource methods and use error
- *  messages on the client! (More on that later).
- *
- *  The user resolver has been completed as an example of what you'll need to do.
- *  Finish of the rest of the resolvers when you're ready.
- */
-
 const { ApolloError } = require('apollo-server-express');
 
-// @TODO: Uncomment these lines later when we add auth
 const jwt = require('jsonwebtoken');
 const authMutations = require('./auth');
 // -------------------------------
@@ -55,7 +38,6 @@ module.exports = app => {
         }
       },
       async tags(parent, { id }, { pgResource }) {
-        // @TODO: Replace this mock return statement with the correct tags from Postgres
         try {
           const tag = await pgResource.getTags();
           return tag;
@@ -67,19 +49,7 @@ module.exports = app => {
     },
 
     User: {
-      /**
-       *  @TODO: Advanced resolvers
-       *
-       *  The User GraphQL type has two fields that are not present in the
-       *  user table in Postgres: items and borrowed.
-       *
-       *  According to our GraphQL schema, these fields should return a list of
-       *  Items (GraphQL type) the user has lent (items) and borrowed (borrowed).
-       *
-       */
-      // @TODO: Uncomment these lines after you define the User type with these fields
       async items(parent, _, { pgResource }) {
-        // @TODO: Replace this mock return statement with the correct items from Postgres
         try {
           const userItem = await pgResource.getItemsForUser(parent.id);
 
@@ -98,25 +68,11 @@ module.exports = app => {
         } catch (e) {
           throw new ApolloError(e);
         }
-        // @TODO: Replace this mock return statement with the correct items from Postgres
-        // -------------------------------
       }
     },
 
     Item: {
-      /**
-       *  @TODO: Advanced resolvers
-       *
-       *  The Item GraphQL type has two fields that are not present in the
-       *  Items table in Postgres: itemowner, tags and borrower.
-       *
-       * According to our GraphQL schema, the itemowner and borrower should return
-       * a User (GraphQL type) and tags should return a list of Tags (GraphQL type)
-       *
-       */
-      // @TODO: Uncomment these lines after you define the Item type with these fields
       async itemowner(item, _, { pgResource }) {
-        // @TODO: Replace this mock return statement with the correct user from Postgres
         try {
           const itemOwner = await pgResource.getUserById(item.ownerid);
 
@@ -126,7 +82,6 @@ module.exports = app => {
         }
       },
       async tags(item, _, { pgResource }) {
-        // @TODO: Replace this mock return statement with the correct tags for the queried Item from Postgres
         try {
           const itemTags = await pgResource.getTagsForItem(item.id);
 
@@ -153,14 +108,10 @@ module.exports = app => {
     },
 
     Mutation: {
-      // @TODO: Uncomment this later when we add auth
       ...authMutations(app),
-      // -------------------------------
 
       async addItem(parent, { item }, { pgResource, token }, info) {
         try {
-          // const image = await image;
-          // const user = await jwt.decode(token, app.get('JWT_SECRET'));
           const user = await jwt.decode(token, app.get('JWT_SECRET'));
           const newItem = await pgResource.saveNewItem({
             item,

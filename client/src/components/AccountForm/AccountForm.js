@@ -13,8 +13,6 @@ import {
   VIEWER_QUERY
 } from '../../apollo/queries';
 import { graphql, compose } from 'react-apollo';
-import validate from './helpers/validation';
-import TextField from '@material-ui/core/TextField';
 import styles from './styles';
 
 class AccountForm extends Component {
@@ -38,18 +36,13 @@ class AccountForm extends Component {
                 e.preventDefault();
                 const { password, email, fullname } = values;
 
-                console.log('values');
                 if (this.state.formToggle) {
-                  console.log('logging in');
-                  console.log(`password is: ${password}`);
-                  console.log(`email is: ${email}`);
                   this.props.loginMutation({
                     variables: {
                       user: { email, password }
                     }
                   });
                 } else {
-                  console.log('singing upt');
                   this.props.signupMutation({
                     variables: {
                       user: {

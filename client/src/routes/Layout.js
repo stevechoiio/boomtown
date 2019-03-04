@@ -5,10 +5,8 @@ import HomeContainer from '../pages/Home/HomeContainer';
 import ShareContainer from '../pages/Share/ShareContainer';
 import ProfileContainer from '../pages/Profile/ProfileContainer';
 import ItemsContainer from '../pages/Items/ItemsContainer';
-import Share from '../pages/Share/ShareContainer';
 import { ViewerContext } from '../context/ViewerProvider';
 import MenuBar from '../components/MenuBar/MenuBar';
-import LoadingCircle from '../components/Loading/Loading';
 export default () => (
   <Fragment>
     <ViewerContext.Consumer>

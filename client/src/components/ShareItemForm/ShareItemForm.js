@@ -31,9 +31,7 @@ class ShareItemForm extends React.Component {
       selectedTags: []
     };
   }
-  onSubmit = e => {
-    console.log(e);
-  };
+
   generateTagsText(tags, selected) {
     return tags
       .map(t => (selected.indexOf(t.id) > -1 ? t.title : false))
@@ -202,11 +200,7 @@ class ShareItemForm extends React.Component {
                             {...input}
                             placeholder="Name your Item"
                           />
-                          {console.log('meta is', meta)}
-                          {console.log(
-                            'error in form for title is ',
-                            meta.error
-                          )}
+
                           {meta.error &&
                             meta.touched && <span>{meta.error}</span>}
                         </div>
@@ -216,8 +210,7 @@ class ShareItemForm extends React.Component {
                       {({ input, meta }) => (
                         <div>
                           <TextField className={classes.formField} {...input} />
-                          {console.log('meta is', meta)}
-                          {console.log('error in form is ', meta.error)}
+
                           {meta.error &&
                             meta.touched && <span>{meta.error}</span>}
                         </div>
