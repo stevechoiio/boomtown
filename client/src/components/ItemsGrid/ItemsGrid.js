@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import styles from './styles';
 import { withStyles } from '@material-ui/core';
 import ItemCard from '../ItemCard/ItemCard';
-
+import PropTypes from 'prop-types';
 const ItemsGrid = ({ items, classes, history }) => {
   return (
     <div>
@@ -24,4 +24,7 @@ const ItemsGrid = ({ items, classes, history }) => {
   );
 };
 
+ItemsGrid.proptypes = {
+  classes: PropTypes.object
+};
 export default withStyles(styles)(ItemsGrid);

@@ -14,6 +14,7 @@ import {
 } from '../../apollo/queries';
 import { graphql, compose } from 'react-apollo';
 import styles from './styles';
+import PropTypes from 'prop-types';
 
 class AccountForm extends Component {
   constructor(props) {
@@ -22,7 +23,6 @@ class AccountForm extends Component {
       formToggle: true
     };
   }
-
   render() {
     const { classes } = this.props;
 
@@ -147,6 +147,9 @@ class AccountForm extends Component {
   }
 }
 
+AccountForm.propTypes = {
+  classes: PropTypes.object
+};
 const refetchQueries = [
   {
     query: VIEWER_QUERY

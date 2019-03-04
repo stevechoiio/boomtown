@@ -7,6 +7,7 @@ import ItemsGrid from '../ItemsGrid/ItemsGrid';
 import { withStyles } from '@material-ui/core';
 import Gravatar from 'react-gravatar';
 import styles from './styles';
+
 const ProfileCard = ({ user, history, classes }) => {
   return (
     <Grid alignContent="center">

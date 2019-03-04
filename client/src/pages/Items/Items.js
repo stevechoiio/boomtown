@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import ItemsGrid from '../../components/ItemsGrid/ItemsGrid';
-
+import PropTypes from 'prop-types';
 const Items = ({ classes, history, items }) => {
   return (
     <>
@@ -10,4 +10,7 @@ const Items = ({ classes, history, items }) => {
   );
 };
 
+Items.propTypes = {
+  classes: PropTypes.object
+};
 export default withRouter(Items);

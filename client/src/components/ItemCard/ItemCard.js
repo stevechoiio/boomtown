@@ -74,6 +74,9 @@ const ItemCard = ({ item, history, classes }) => {
     </Card>
   );
 };
+ItemCard.propTypes = {
+  item: PropTypes.object
+};
 
 ItemCard.defaultProps = {
   item: {
