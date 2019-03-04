@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react';
 import { Redirect, Route, Switch } from 'react-router';
-
-import HomeContainer from '../pages/Home/HomeContainer';
-import ShareContainer from '../pages/Share/ShareContainer';
-import ProfileContainer from '../pages/Profile/ProfileContainer';
-import ItemsContainer from '../pages/Items/ItemsContainer';
+import Home from '../pages/Home';
+import Share from '../pages/Share';
+import Profile from '../pages/Profile';
+import Items from '../pages/Items';
 import { ViewerContext } from '../context/ViewerProvider';
 import MenuBar from '../components/MenuBar/MenuBar';
 export default () => (
@@ -17,10 +16,10 @@ export default () => (
             <>
               <MenuBar />
               <Switch>
-                <Route exact path="/items" component={ItemsContainer} />
-                <Route exact path="/share" component={ShareContainer} />
-                <Route exact path="/profile" component={ProfileContainer} />
-                <Route path="/profile/:id" component={ProfileContainer} />
+                <Route exact path="/items" component={Items} />
+                <Route exact path="/share" component={Share} />
+                <Route exact path="/profile" component={Profile} />
+                <Route path="/profile/:id" component={Profile} />
                 <Redirect from="*" to="/items" />
               </Switch>
             </>
@@ -28,7 +27,7 @@ export default () => (
         } else {
           return (
             <Switch>
-              <Route exact path="/welcome" component={HomeContainer} />
+              <Route exact path="/welcome" component={Home} />
               <Redirect from="*" to="/welcome" />
             </Switch>
           );
