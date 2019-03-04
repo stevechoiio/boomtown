@@ -9,24 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { ViewerContext } from '../../context//ViewerProvider';
 import TimeCalculator from './TimeCalculator';
-
 import CardHeader from '@material-ui/core/CardHeader';
-
-import IconButton from '@material-ui/core/IconButton';
-
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-const styles = {
-  card: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%' // 16:9
-  },
-  button: { marginBottom: 100, margin: 50 }
-};
+import styles from './styles';
 
 const ItemCard = ({ item, history, classes }) => {
   console.log(item);
