@@ -6,12 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import ItemsGrid from '../ItemsGrid/ItemsGrid';
 import { withStyles } from '@material-ui/core';
 import Gravatar from 'react-gravatar';
-const styles = {
-  card: {
-    Width: '100%'
-  }
-};
-
+import styles from './styles';
 const ProfileCard = ({ user, history, classes }) => {
   return (
     <Grid alignContent="center">

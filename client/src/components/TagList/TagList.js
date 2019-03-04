@@ -10,14 +10,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import LoadingCircle from '../../components/Loading/Loading';
-const styles = theme => ({
-  root: {
-    display: 'flex'
-  },
-  formControl: {
-    margin: theme.spacing.unit * 3
-  }
-});
+import styles from './styles';
 
 const TagList = ({ classes }) => {
   return (

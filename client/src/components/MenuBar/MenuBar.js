@@ -6,26 +6,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { withRouter } from 'react-router';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from 'react-router-dom';
 import MenuDropdown from '../MenuDropdown/MenuDropdown';
 import logo from '../../images/boomtown.svg';
 import Slide from '@material-ui/core/Slide';
-const styles = {
-  root: {
-    flexGrow: 1
-  },
-  grow: {
-    flexGrow: 1
-  },
-  menuButton: {
-    marginRight: 5,
-    paddingRight: 10
-  },
-  logo: {
-    maxWidth: '90%'
-  }
-};
+import styles from './styles';
 
 const ButtonAppBar = props => {
   const { classes, history, location } = props;
