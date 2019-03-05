@@ -1,94 +1,41 @@
 # Boomtown 🏙
 
-## Server
+Boomtown is a full-stack web application. It allows user login, basic CRUD functionality.
 
-Commands must be run from the `server` directory:
+## Authors
 
-### Installation
+- Steve Choi | https://github.com/stevechoiio
 
-```bash
-npm install
-```
+## Screenshots
 
-### Run
+### Welcome Screen
 
-```bash
-npm run start:dev
-```
+## Technologies Used
 
-### Tests
+`Back-end Development`:
 
-Just linting:
+- Apollo Server
+- PostgreSQL
+- SimpleSchema
+- Node.js
+- bcrypt
 
-```bash
-npm run lint
-```
+`Front-end Development`:
 
-Run linting, and fix any errors:
+- React.js
+- Material-UI
 
-```bash
-npm run lint:fix
-```
+## Installation Instructions
 
-Run Jest tests:
+Install
+`npm install`
 
-```
-npm run jest
-```
+Client-side
+`npm start`
 
-Run Jest tests, and watch for changes:
+Server-side
+`npm start:dev`
 
-```bash
-npm run jest:watch
-```
+## Reflections
 
-Run all tests:
-
-```bash
-npm run test
-```
-
-## Client
-
-Commands must be run from the `client` directory:
-
-### Installation
-
-```bash
-npm install
-```
-
-### Run
-
-```bash
-npm start
-```
-
-### Build
-
-```bash
-npm run build
-```
-
-### Tests
-
-Just linting:
-
-```bash
-npm run lint
-```
-
-Run linting, and fix any errors:
-
-```bash
-npm run lint:fix
-```
-
-Run all tests:
-
-```bash
-npm run test
-```
-
-
-# boomtown
+First project to implement user authentication using bcrypt.

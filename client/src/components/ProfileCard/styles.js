@@ -1,5 +1,5 @@
-export default (styles = {
+export default {
   card: {
     Width: '100%'
   }
-});
+};

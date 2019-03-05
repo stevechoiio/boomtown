@@ -1,4 +1,4 @@
-export default (styles = {
+export default {
   root: {
     flexGrow: 1
   },
@@ -12,4 +12,4 @@ export default (styles = {
   logo: {
     maxWidth: '90%'
   }
-});
+};

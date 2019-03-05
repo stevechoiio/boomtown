@@ -1,5 +1,5 @@
-export default (styles = theme => ({
+export default theme => ({
   progress: {
     margin: theme.spacing.unit * 2
   }
-}));
+});

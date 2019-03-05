@@ -1,4 +1,4 @@
-export default (styles = {
+export default {
   card: {
     height: '100%',
     display: 'flex',
@@ -9,4 +9,4 @@ export default (styles = {
     paddingTop: '56.25%' // 16:9
   },
   button: { marginBottom: 100, margin: 50 }
-});
+};
