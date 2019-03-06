@@ -1,9 +1,11 @@
 const styles = theme => ({
   media: {
-    padding: 100,
+    paddingLeft: 100,
+    paddingRight: 100,
+    paddingTop: 20,
 
-    display: 'flex',
-    justifyContent: 'flex-start'
+    display: 'flex'
+    // justifyContent: 'flex-start'
   }
 });
 

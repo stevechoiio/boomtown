@@ -14,7 +14,7 @@ const ProfileCard = ({ user, history, classes }) => {
       <Grid
         item
         alignContent="center"
-        style={{ marginLeft: 100, marginTop: 20, marginRight: 100 }}
+        style={{ marginLeft: 100, marginTop: 50, marginRight: 100 }}
         justify="flex-start"
       >
         <Card className={classes.card}>
@@ -46,14 +46,17 @@ const ProfileCard = ({ user, history, classes }) => {
         <Typography
           component="h2"
           variant="display2"
-          gutterBottom
-          style={{ color: '#f9a825', marginTop: 50 }}
+          style={{ color: '#f9a825', marginTop: 20 }}
         >
           Shared items
         </Typography>
       </Grid>
 
-      <ItemsGrid items={user.items} history={history} />
+      <ItemsGrid
+        style={{ paddingTop: 0 }}
+        items={user.items}
+        history={history}
+      />
     </Grid>
   );
 };
