@@ -56,7 +56,7 @@ const ItemCard = ({ item, history, classes }) => {
         <Typography variant="title" gutterBottom>
           {item.title}
         </Typography>
-        <Typography variant="caption" gutterBottom align="flex-start">
+        <Typography variant="caption" gutterBottom>
           {item.tags
             .map(tag => {
               return tag.title;

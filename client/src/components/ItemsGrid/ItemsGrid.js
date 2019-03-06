@@ -7,7 +7,7 @@ import ItemCard from '../ItemCard/ItemCard';
 import PropTypes from 'prop-types';
 const ItemsGrid = ({ items, classes, history }) => {
   return (
-    <Grid className={classes.media} container alignItems="stretch" spacing={16}>
+    <Grid className={classes.media} container alignItems="stretch" spacing={24}>
       {items.map(item => (
         <Grid item xs={12} md={6} lg={4} key={item.id}>
           <ItemCard item={item} history={history} />
