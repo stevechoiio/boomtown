@@ -31,9 +31,7 @@ class ShareItemForm extends React.Component {
       selectedTags: []
     };
   }
-  onSubmit = e => {
-    console.log(e);
-  };
+
   generateTagsText(tags, selected) {
     return tags
       .map(t => (selected.indexOf(t.id) > -1 ? t.title : false))
@@ -98,13 +96,7 @@ class ShareItemForm extends React.Component {
     const { classes, updateItem, resetImage, resetItem, tags } = this.props;
 
     return (
-      <Grid
-        container
-        className={classes.root}
-        direction="row"
-        alignItems="center"
-        justify="center"
-      >
+      <Grid container className={classes.root} direction="row">
         <Typography variant="display4" className={classes.headline}>
           Share. Borrow. Prosper.
         </Typography>
@@ -123,8 +115,7 @@ class ShareItemForm extends React.Component {
             submitting,
             pristine,
             values,
-            invalid,
-            reset
+            invalid
           }) => (
             <Mutation mutation={ADD_ITEM_MUTATION}>
               {addItem => (
@@ -147,7 +138,7 @@ class ShareItemForm extends React.Component {
                       this.fileInput.current.value = '';
                       this.setState({ selectedTags: [] });
                       resetImage();
-                      reset();
+                      form.reset();
                     }}
                   >
                     <FormSpy
@@ -202,11 +193,7 @@ class ShareItemForm extends React.Component {
                             {...input}
                             placeholder="Name your Item"
                           />
-                          {console.log('meta is', meta)}
-                          {console.log(
-                            'error in form for title is ',
-                            meta.error
-                          )}
+
                           {meta.error &&
                             meta.touched && <span>{meta.error}</span>}
                         </div>
@@ -216,8 +203,7 @@ class ShareItemForm extends React.Component {
                       {({ input, meta }) => (
                         <div>
                           <TextField className={classes.formField} {...input} />
-                          {console.log('meta is', meta)}
-                          {console.log('error in form is ', meta.error)}
+
                           {meta.error &&
                             meta.touched && <span>{meta.error}</span>}
                         </div>
@@ -261,8 +247,12 @@ class ShareItemForm extends React.Component {
                       }}
                     </Field>
                     <div />
-                    <Button disabled={submitting || pristine} type="submit">
-                      Submit
+                    <Button
+                      disabled={submitting || pristine}
+                      style={{ marginTop: 20, backgroundColor: '#f9a825' }}
+                      type="submit"
+                    >
+                      Share
                     </Button>
                   </form>
                 </div>
@@ -275,9 +265,9 @@ class ShareItemForm extends React.Component {
   }
 }
 
-ShareItemForm.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+// ShareItemForm.propTypes = {
+//   classes: PropTypes.object.isRequired
+// };
 
 const mapDispatchToProps = dispatch => ({
   /*  This function will provide a prop called 
