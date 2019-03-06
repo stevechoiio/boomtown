@@ -26,7 +26,6 @@ module.exports = app => {
       try {
         const { password, name, email } = user;
         const hashedPassword = await bcrypt.hash(password, 10);
-        console.log(hashedPassword);
 
         const newUser = await context.pgResource.createUser({
           name,

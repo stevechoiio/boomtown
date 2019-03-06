@@ -1,6 +1,5 @@
 import React from 'react';
 import { ALL_TAGS_QUERY } from '../../apollo/queries';
-
 import { Query } from 'react-apollo';
 import { withStyles } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';

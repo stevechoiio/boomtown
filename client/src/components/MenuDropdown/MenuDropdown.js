@@ -45,11 +45,7 @@ class MenuDropdown extends React.Component {
               return (
                 <>
                   <Link to={`/profile/${viewer.id}`}>
-                    <MenuItem
-                      onClick={() => {
-                        console.log('asdf');
-                      }}
-                    >
+                    <MenuItem onClick={() => {}}>
                       <i className="fas fa-fingerprint" /> &nbsp;&nbsp;Your
                       Profile
                     </MenuItem>
@@ -63,7 +59,6 @@ class MenuDropdown extends React.Component {
             {(logout, { data }) => (
               <MenuItem
                 onClick={e => {
-                  console.log('signing out!');
                   e.preventDefault();
                   logout();
                   window.location.reload();

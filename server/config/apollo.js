@@ -18,8 +18,6 @@ module.exports = ({ app, pgResource }) => {
       const tokenName = app.get('JWT_COOKIE_NAME');
       const token = req ? req.cookies[tokenName] : undefined;
 
-      console.log(`token is: ${token}`);
-
       return {
         token,
         pgResource,

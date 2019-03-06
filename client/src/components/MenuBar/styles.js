@@ -1,13 +1,13 @@
 export default {
   root: {
-    flexGrow: 1
+    display: 'flex',
+    flexDirection: 'space-between'
   },
   grow: {
     flexGrow: 1
   },
   menuButton: {
-    marginRight: 5,
-    paddingRight: 10
+    color: 'black'
   },
   logo: {
     maxWidth: '90%'

@@ -1,6 +1,7 @@
 const styles = theme => ({
   button: {
-    width: 400
+    width: 400,
+    backgroundColor: '#f9a825'
   },
   headline: {
     fontWeight: 700,

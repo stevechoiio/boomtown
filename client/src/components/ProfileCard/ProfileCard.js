@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
@@ -11,40 +11,49 @@ import styles from './styles';
 const ProfileCard = ({ user, history, classes }) => {
   return (
     <Grid alignContent="center">
-      <Grid fullwidth item alignContent="center">
+      <Grid
+        item
+        alignContent="center"
+        style={{ marginLeft: 100, marginTop: 20, marginRight: 100 }}
+        justify="flex-start"
+      >
         <Card className={classes.card}>
-          <Gravatar
-            email={user.id}
-            style={{ borderRadius: '30px' }}
-            default="retro"
-          />
           <CardContent>
-            <Typography component="h4" variant="display4">
-              {user.name}
+            <Grid container style={{ display: 'flex', flexDirection: 'row' }}>
+              <Gravatar
+                email={user.id}
+                style={{ borderRadius: '30px' }}
+                default="retro"
+              />
+              <Typography
+                style={{ paddingLeft: 20 }}
+                component="h2"
+                variant="display2"
+                gutterBottom
+              >
+                {user.name}
+              </Typography>
+            </Grid>
+            <Typography component="h2" variant="headline" gutterBottom>
+              {user.items.length} owned,{' '}
+              {user.items.borrowed ? user.items.borrowed.length : 0} borrowed
             </Typography>
-            <Typography>
-              Bio:{user.bio != 'null' ? user.bio : 'no bio shared'}
-            </Typography>
-            <Typography variant="subtitle1">
-              {' '}
-              <span style={{ color: 'Red' }}>
-                {user.items.length}
-              </span> owned,{' '}
-              <span style={{ color: 'Red' }}>
-                {user.items.borrowed ? user.items.borrowed.length : 0}
-              </span>{' '}
-              borrowed
+            <Typography component="h2" variant="headline" gutterBottom>
+              {user.bio != 'null' ? user.bio : 'no bio shared'}
             </Typography>
           </CardContent>
         </Card>
+        <Typography
+          component="h2"
+          variant="display2"
+          gutterBottom
+          style={{ color: '#f9a825', marginTop: 50 }}
+        >
+          Shared items
+        </Typography>
       </Grid>
 
-      <Grid>
-        <Typography component="h2" variant="h1">
-          Shared items:
-        </Typography>
-        <ItemsGrid items={user.items} history={history} />
-      </Grid>
+      <ItemsGrid items={user.items} history={history} />
     </Grid>
   );
 };

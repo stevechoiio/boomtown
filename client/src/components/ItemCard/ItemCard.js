@@ -13,7 +13,6 @@ import CardHeader from '@material-ui/core/CardHeader';
 import styles from './styles';
 
 const ItemCard = ({ item, history, classes }) => {
-  console.log(item);
   return (
     <Card
       onClick={() => {
@@ -27,50 +26,50 @@ const ItemCard = ({ item, history, classes }) => {
         title={item.title}
       />
 
+      <ViewerContext.Consumer>
+        {({ viewer, loading }) => {
+          return (
+            <CardHeader
+              style={{ left: 32 }}
+              title={
+                <Typography>
+                  {item.itemowner.name ? item.itemowner.name : viewer.name}
+                </Typography>
+              }
+              subheader={
+                <Typography>
+                  <TimeCalculator time={item.created} />
+                </Typography>
+              }
+              avatar={
+                <Gravatar
+                  style={{ borderRadius: '30px' }}
+                  email={item.itemowner.id}
+                  default="retro"
+                />
+              }
+            />
+          );
+        }}
+      </ViewerContext.Consumer>
       <CardContent>
-        <ViewerContext.Consumer>
-          {({ viewer, loading }) => {
-            return (
-              <CardHeader
-                title={
-                  <Typography>
-                    {item.itemowner.name ? item.itemowner.name : viewer.name}
-                  </Typography>
-                }
-                subheader={
-                  <Typography>
-                    <TimeCalculator time={item.created} />
-                  </Typography>
-                }
-                avatar={
-                  <Gravatar
-                    style={{ borderRadius: '30px' }}
-                    email={item.itemowner.id}
-                    default="retro"
-                  />
-                }
-              />
-            );
-          }}
-        </ViewerContext.Consumer>
-        <Typography component="h1" gutterBottom>
+        <Typography variant="title" gutterBottom>
           {item.title}
         </Typography>
-
-        <Typography variant="h6" gutterBottom>
-          {item.description}
-        </Typography>
-        <Typography>
+        <Typography variant="caption" gutterBottom align="flex-start">
           {item.tags
             .map(tag => {
               return tag.title;
             })
             .join(', ')}
+        </Typography>{' '}
+        <Typography variant="body1" gutterBottom align="left">
+          {item.description}
         </Typography>
+        <Button className={classes.button} variant="outlined">
+          Borrow
+        </Button>
       </CardContent>
-      <Button className={classes.button} variant="outlined">
-        Borrow
-      </Button>
     </Card>
   );
 };

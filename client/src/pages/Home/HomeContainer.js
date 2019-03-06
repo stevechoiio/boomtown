@@ -5,11 +5,7 @@ import styles from './styles';
 
 class HomeContainer extends Component {
   render() {
-    return (
-      <div>
-        <Home classes={this.props.classes} />
-      </div>
-    );
+    return <Home classes={this.props.classes} />;
   }
 }
 export default withStyles(styles)(HomeContainer);

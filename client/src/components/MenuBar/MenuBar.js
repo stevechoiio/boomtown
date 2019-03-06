@@ -21,29 +21,46 @@ const ButtonAppBar = props => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton>
-            <Link to="/items">
-              <img src={logo} className={classes.logo} />
-            </Link>
-          </IconButton>
-
-          {!viewToggle ? (
-            <Slide
-              direction="left"
-              in={location.pathname !== '/share'}
-              unmountOnExit
+          <div
+            style={{
+              display: 'flex',
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'space-between'
+            }}
+          >
+            <IconButton>
+              <Link to="/items">
+                <img src={logo} className={classes.logo} />
+              </Link>
+            </IconButton>
+            <div
+              style={{
+                display: 'flex',
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'flex-end'
+              }}
             >
-              <Button size="small" className={classes.menuButton}>
-                <Link to="/share">
-                  <i className="fas fa-plus-circle" /> &nbsp;Share an Item{' '}
-                </Link>
-              </Button>
-            </Slide>
-          ) : (
-            ''
-          )}
-
-          <MenuDropdown className={classes.menuButton} />
+              {' '}
+              {!viewToggle ? (
+                <Slide
+                  direction="left"
+                  in={location.pathname !== '/share'}
+                  unmountOnExit
+                >
+                  <Button size="small">
+                    <Link to="/share" className={classes.menuButton}>
+                      <i className="fas fa-plus-circle" /> &nbsp;Share an Item{' '}
+                    </Link>
+                  </Button>
+                </Slide>
+              ) : (
+                ''
+              )}
+              <MenuDropdown className={classes.menuButton} />
+            </div>
+          </div>
         </Toolbar>
       </AppBar>
     </div>

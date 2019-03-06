@@ -7,7 +7,10 @@ const Profile = ({ classes, id, user, history, styles }) => {
 };
 
 ProfileCard.propTypes = {
-  classes: PropTypes.object
+  classes: PropTypes.object,
+  id: PropTypes.string,
+  history: PropTypes.string,
+  styles: PropTypes.object
 };
 
 export default withRouter(Profile);

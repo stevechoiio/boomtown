@@ -24,6 +24,7 @@ Boomtown is a full-stack web application. It allows user login, basic CRUD funct
 
 - React.js
 - Material-UI
+- Apollo Client
 
 ## Installation Instructions
 

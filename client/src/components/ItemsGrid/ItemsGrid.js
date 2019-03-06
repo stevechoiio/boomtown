@@ -7,20 +7,13 @@ import ItemCard from '../ItemCard/ItemCard';
 import PropTypes from 'prop-types';
 const ItemsGrid = ({ items, classes, history }) => {
   return (
-    <div>
-      <Grid
-        className={classes.media}
-        container
-        alignItems="flex-start"
-        spacing={16}
-      >
-        {items.map(item => (
-          <Grid item xs={12} md={6} lg={4} key={item.id}>
-            <ItemCard item={item} history={history} />
-          </Grid>
-        ))}
-      </Grid>
-    </div>
+    <Grid className={classes.media} container alignItems="stretch" spacing={16}>
+      {items.map(item => (
+        <Grid item xs={12} md={6} lg={4} key={item.id}>
+          <ItemCard item={item} history={history} />
+        </Grid>
+      ))}
+    </Grid>
   );
 };
 

@@ -11,6 +11,8 @@ const Items = ({ classes, history, items }) => {
 };
 
 Items.propTypes = {
-  classes: PropTypes.object
+  classes: PropTypes.object,
+  history: PropTypes.object,
+  items: PropTypes.array
 };
 export default withRouter(Items);

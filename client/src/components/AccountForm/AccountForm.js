@@ -134,15 +134,11 @@ class AccountForm extends Component {
                   </Typography>
                 </Grid>
               </FormControl>
-              <Typography className={classes.errorMessage}>
-                {/* @TODO: Display sign-up and login errors */}
-              </Typography>
+              <Typography className={classes.errorMessage} />
             </form>
           );
         }}
       />
-
-      // @TODO: Close Final Form <Form />
     );
   }
 }
@@ -155,8 +151,6 @@ const refetchQueries = [
     query: VIEWER_QUERY
   }
 ];
-// @TODO: Use compose to add the login and signup mutations to this components props.
-// @TODO: Refetch the VIEWER_QUERY to reload the app and access authenticated routes.
 export default compose(
   graphql(SIGNUP_MUTATION, {
     options: {
